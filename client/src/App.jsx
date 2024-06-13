@@ -1,14 +1,25 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
+import CreatePost from './pages/CreatePost'
+import ShowResults from './pages/ShowResults'
+
+
 
 function App() {
 
   return (
     <>
-    <NavBar/>    
-    <div className='text-3xl text-red-400'>Heleo  worke</div>
-    <Footer/>
+      <div className="flex flex-col min-h-screen">
+
+        <NavBar />
+        <main className='flex-grow'>
+
+          {/* <CreatePost /> */}
+          <ShowResults/>
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }

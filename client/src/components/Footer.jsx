@@ -2,7 +2,8 @@ import React from 'react';
 
 function Footer() {
     return (
-        <div className='absolute inset-x-0 bottom-0 text-gray-800 bg-white py-10'>
+        
+        <div className=' text-gray-800 bg-white py-4'>
             <div className='flex flex-col md:flex-row justify-around m-6 p-7'>
                 <div className='flex flex-col mb-6 md:mb-0'>
                     <div className='font-bold text-lg mb-4'>
