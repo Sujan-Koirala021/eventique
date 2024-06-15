@@ -1,14 +1,42 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', {
+        email,
+        password,
+      });
+
+      // Assuming the response contains a token
+      const { token, userId } = response.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
+
+      // Redirect to a protected route (for example, /dashboard)
+      // window.location.href = '/dashboard';
+      // window.location.href = '/';
+      console.log("Login success")
+
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h1 className="text-4xl font-bold mb-6 text-center">Login</h1>
-        <form action="submit" className="flex flex-col space-y-4">
+        {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+        <form onSubmit={handleLogin} className="flex flex-col space-y-4">
           <input
             type="email"
             placeholder="Enter email"
@@ -33,7 +61,7 @@ function LoginPage() {
           </button>
           <p className="text-center mt-4">
             Still have no account?{' '}
-            <a href="#" className="text-blue-500 underline hover:text-blue-600">
+            <a href="/signup" className="text-blue-500 underline hover:text-blue-600">
               Sign In
             </a>
           </p>
