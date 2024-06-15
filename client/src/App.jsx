@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
-import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignUpPage'
+// import LoginPage from './pages/LoginPage'
+
 // import CreatePost from './pages/CreatePost'
 // import ShowResults from './pages/ShowResults'
 
@@ -17,7 +19,8 @@ function App() {
 
           {/* <CreatePost /> */}
           {/* <ShowResults/> */}
-          <LoginPage/>
+          {/* <LoginPage/> */}
+          <SignupPage/>
         </main>
         <Footer />
       </div>
