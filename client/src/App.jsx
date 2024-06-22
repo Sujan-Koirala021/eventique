@@ -7,6 +7,7 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import SignupPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
+import ContactUs from './pages/ContactUs';
 
 // import CreatePost from './pages/CreatePost'
 // import ShowResults from './pages/ShowResults'
@@ -41,10 +42,10 @@ function App() {
         //   path: '/about',
         //   element: <AboutUs />
         // },
-        // {
-        //   path: '/contact-us',
-        //   element: <ContactUs />
-        // },
+        {
+          path: '/contact-us',
+          element: <ContactUs />
+        },
         {
           path : '/sign-up',
           element: <SignupPage/>
