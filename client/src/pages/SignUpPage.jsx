@@ -5,6 +5,7 @@ function SignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('reader'); // Default role is 'reader'
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -18,6 +19,7 @@ function SignupPage() {
         username: name,
         email,
         password,
+        role,
       });
 
       // Assuming a success message is returned
@@ -58,6 +60,18 @@ function SignupPage() {
             onChange={(e) => setPassword(e.target.value)}
             className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          <label className="flex flex-col">
+            Choose a role:
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="reader">Reader</option>
+              <option value="author">Author</option>
+              <option value="editor">Editor</option>
+            </select>
+          </label>
           <button
             type="submit"
             className="bg-blue-500 text-white p-3 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
