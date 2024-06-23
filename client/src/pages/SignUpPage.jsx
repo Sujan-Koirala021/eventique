@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 function SignupPage() {
@@ -80,9 +81,9 @@ function SignupPage() {
           </button>
           <p className="text-center mt-4">
             Already have an account?{' '}
-            <a href="/login" className="text-blue-500 underline hover:text-blue-600">
+            <Link to="/login" className="text-blue-500 underline hover:text-blue-600">
               Log In
-            </a>
+            </Link>
           </p>
         </form>
       </div>

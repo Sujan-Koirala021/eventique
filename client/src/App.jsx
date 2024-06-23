@@ -8,6 +8,8 @@ import Footer from './components/Footer'
 import SignupPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import ContactUs from './pages/ContactUs';
+import AboutUs from './pages/AboutPage';
+import EventsPage from './pages/EventsPage';
 
 // import CreatePost from './pages/CreatePost'
 // import ShowResults from './pages/ShowResults'
@@ -38,10 +40,10 @@ function App() {
           path: '/login',
           element: <LoginPage />
         },
-        // {
-        //   path: '/about',
-        //   element: <AboutUs />
-        // },
+        {
+          path: '/about',
+          element: <AboutUs />
+        },
         {
           path: '/contact-us',
           element: <ContactUs />
@@ -49,6 +51,10 @@ function App() {
         {
           path : '/sign-up',
           element: <SignupPage/>
+        },
+        {
+          path : '/events',
+          element: <EventsPage/>
         }
       ]
     },

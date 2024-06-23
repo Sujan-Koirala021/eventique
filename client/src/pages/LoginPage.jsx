@@ -1,10 +1,13 @@
+// LoginPage.js
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,10 +24,7 @@ function LoginPage() {
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
 
-      // Redirect to a protected route (for example, /dashboard)
-      // window.location.href = '/dashboard';
-      // window.location.href = '/';
-      console.log("Login success")
+      navigate('/events'); // Redirect to events page after successful login
 
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
@@ -61,9 +61,9 @@ function LoginPage() {
           </button>
           <p className="text-center mt-4">
             Still have no account?{' '}
-            <a href="/signup" className="text-blue-500 underline hover:text-blue-600">
-              Sign In
-            </a>
+            <Link to="/sign-up" className="text-blue-500 underline hover:text-blue-600">
+              Sign Up
+            </Link>
           </p>
         </form>
       </div>
