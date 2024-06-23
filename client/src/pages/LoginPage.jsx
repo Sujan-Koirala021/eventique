@@ -24,7 +24,7 @@ function LoginPage() {
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
 
-      navigate('/events'); // Redirect to events page after successful login
+      navigate('/dashboard'); // Redirect to dashboard page after successful login
 
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');

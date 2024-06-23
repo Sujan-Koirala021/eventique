@@ -9,7 +9,7 @@ import SignupPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import ContactUs from './pages/ContactUs';
 import AboutUs from './pages/AboutPage';
-import EventsPage from './pages/EventsPage';
+import Dashboard from './pages/Dashboard';
 
 // import CreatePost from './pages/CreatePost'
 // import ShowResults from './pages/ShowResults'
@@ -53,8 +53,8 @@ function App() {
           element: <SignupPage/>
         },
         {
-          path : '/events',
-          element: <EventsPage/>
+          path : '/dashboard',
+          element: <Dashboard/>
         }
       ]
     },
