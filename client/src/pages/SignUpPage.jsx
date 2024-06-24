@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function SignupPage() {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('reader'); // Default role is 'reader'
+  const [role, setRole] = useState('viewer'); // Default role is 'viewer'
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -17,7 +19,9 @@ function SignupPage() {
 
     try {
       const response = await axios.post('http://localhost:5000/api/register', {
-        username: name,
+        firstName,
+        lastName,
+        username,
         email,
         password,
         role,
@@ -37,17 +41,35 @@ function SignupPage() {
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
         {success && <div className="text-green-500 text-center mb-4">{success}</div>}
         <form onSubmit={handleSignup} className="flex flex-col space-y-4">
+          {/* <div className="flex space-x-2"> */}
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              required
+              onChange={(e) => setFirstName(e.target.value)}
+              className="flex-1 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              required
+              onChange={(e) => setLastName(e.target.value)}
+              className="flex-1 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          {/* </div> */}
           <input
             type="text"
-            placeholder="Enter name"
-            value={name}
+            placeholder="Username"
+            value={username}
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="email"
-            placeholder="Enter email"
+            placeholder="Email"
             value={email}
             required
             onChange={(e) => setEmail(e.target.value)}
@@ -55,7 +77,7 @@ function SignupPage() {
           />
           <input
             type="password"
-            placeholder="Enter password"
+            placeholder="Password"
             value={password}
             required
             onChange={(e) => setPassword(e.target.value)}
