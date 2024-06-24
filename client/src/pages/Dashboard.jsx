@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Dashboard() {
   const [isFormVisible, setFormVisible] = useState(false);
-
+  const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     createdBy: '',
@@ -11,29 +11,51 @@ function Dashboard() {
     date: ''
   });
 
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/events'); // Adjust the URL as needed
+      setEvents(response.data);
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
+
   const toggleFormVisibility = () => {
     setFormVisible(!isFormVisible);
   };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:5000/api/events', formData); // Adjust the URL as needed
       console.log('Event created:', response.data);
       toggleFormVisibility(); // Close the form after successful submission
+      fetchEvents(); // Refresh the events list
     } catch (error) {
       console.error('Error creating event:', error);
     }
   };
-  
 
-
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/events/${id}`); // Adjust the URL as needed
+      fetchEvents(); // Refresh the events list
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -44,44 +66,24 @@ function Dashboard() {
           <div className="px-4 py-6 sm:px-0">
             <div className="rounded-lg h-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Card Example */}
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-bold mb-4">Event 1</h3>
-                  <p className="text-gray-700">Description of event 1.</p>
-                  <div className="flex space-x-2 mt-4">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-                      View Details
-                    </button>
-                    <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
-                      Delete
-                    </button>
+                {/* Render events fetched from the server */}
+                {events.map((event) => (
+                  <div key={event._id} className="bg-white p-6 rounded-lg shadow-md">
+                    <h3 className="text-xl font-bold mb-4">{event.title}</h3>
+                    <p className="text-gray-700">{event.description}</p>
+                    <div className="flex space-x-2 mt-4">
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        View Details
+                      </button>
+                      <button
+                        onClick={() => handleDelete(event._id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
-                </div>
-                {/* Repeat similar cards for other events */}
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-bold mb-4">Event 2</h3>
-                  <p className="text-gray-700">Description of event 2.</p>
-                  <div className="flex space-x-2 mt-4">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-                      View Details
-                    </button>
-                    <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-bold mb-4">Event 3</h3>
-                  <p className="text-gray-700">Description of event 3.</p>
-                  <div className="flex space-x-2 mt-4">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-                      View Details
-                    </button>
-                    <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
-                      Delete
-                    </button>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -158,7 +160,6 @@ function Dashboard() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

@@ -81,4 +81,29 @@ app.post('/api/events', async (req, res) => {
 });
 
 
+// Fetch Events Route
+app.get('/api/events', async (req, res) => {
+  try {
+    const events = await Event.find();
+    res.status(200).json(events);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+// Delete Event Route
+app.delete('/api/events/:id', async (req, res) => {
+  try {
+    const event = await Event.findByIdAndDelete(req.params.id);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+    res.status(200).json({ message: 'Event deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
