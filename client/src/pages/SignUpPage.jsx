@@ -68,9 +68,8 @@ function SignupPage() {
               onChange={(e) => setRole(e.target.value)}
               className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="reader">Reader</option>
-              <option value="author">Author</option>
-              <option value="editor">Editor</option>
+              <option value="viewer">Viewer</option>
+              <option value="manager">Manager</option>
             </select>
           </label>
           <button
