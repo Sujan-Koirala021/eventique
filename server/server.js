@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const Post = require('./models/BlogPost');
 const User = require('./models/User');
+const Event = require('./models/Event'); // Import Event model
 
 dotenv.config();
 
@@ -26,7 +26,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 // User Registration Route
 app.post('/api/register', async (req, res) => {
-  const { username, email, password,role } = req.body;
+  const { username, email, password, role } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -35,7 +35,7 @@ app.post('/api/register', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword , role});
+    const newUser = new User({ username, email, password: hashedPassword, role });
 
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });
@@ -50,14 +50,11 @@ app.post('/api/login', async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    console.log(user)
     if (!user) {
       return res.status(400).json({ message: 'User not found' });
     }
-    console.log(password)
-    console.log(user.password)
+
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch)
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
@@ -69,27 +66,19 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Create Post Route
-app.post('/api/posts', async (req, res) => {
-  const { user, title, content } = req.body;
+// Create Event Route
+// Create Event Route
+app.post('/api/events', async (req, res) => {
+  const { title, createdBy, description, date } = req.body;
 
   try {
-    const newPost = new Post({ user, title, content });
-    await newPost.save();
-    res.status(201).json(newPost);
+    const newEvent = new Event({ title, createdBy, description, date });
+    await newEvent.save();
+    res.status(201).json(newEvent);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
-// Fetch Posts Route
-app.get('/api/posts', async (req, res) => {
-  try {
-    const posts = await Post.find();
-    res.status(200).json(posts);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
