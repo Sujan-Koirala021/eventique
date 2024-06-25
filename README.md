@@ -82,21 +82,6 @@ By implementing an event management system with a Permit.io, organizations can e
 
 5. **Scalability and Flexibility**: A scalable system that can grow with the organization, accommodating new roles and users as needed.
 
-B
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Demo
 <video src=""></video>
@@ -124,6 +109,16 @@ git clone https://github.com/Sujan-Koirala021/eventique.git
 cd eventique
 ```
 
+### Run docker container
+
+```bash
+docker run -it \
+  -p 7766:7000 \
+  --env PDP_API_KEY=permit_key_dCW6vmOdNa9pOSBslXbcU12lpU4xSDflIxNpVFp5vZF3CFHSwmy12KHYngYueWhk8hIMsOdeDzxmTsIquoEcLp \
+  --env PDP_DEBUG=True \
+  permitio/pdp-v2:latest
+```
+
 
 ### Setup Frontend 
 
@@ -143,15 +138,28 @@ npm run dev
 ```
 
 
-
-
-
 ### Setup Backend 
 
 #### Navigate to the server directory:
 ```bash
 cd server
 ```
+
+#### Create your own .env file under server directory
+
+```bash
+MONGODB_URL=<YOUR_MONGO_URL>
+JWT_SECRET=<YOUR_JWT_SECRET_KEY>
+PERMIT_KEY=<YOUR_PERMIT_KEY>
+```
+
+For demo purpose:
+```bash
+MONGODB_URL="mongodb+srv://sujan:sujan123@posts.yr8kto8.mongodb.net/"
+JWT_SECRET="d5e71c94e14061aca0a120a015e41a922996a07b0705108e2e7ff4ff92ba88f7ce1363ba8e8b909d959606e8263dcc08f4a7ebf39655b2248457864516241942"
+PERMIT_KEY=permit_key_dCW6vmOdNa9pOSBslXbcU12lpU4xSDflIxNpVFp5vZF3CFHSwmy12KHYngYueWhk8hIMsOdeDzxmTsIquoEcLp
+```
+
 
 #### Install dependencies:
 ```bash
@@ -160,16 +168,15 @@ npm install
 
 #### Start the  server:
 ```bash
-npm start
+nodemon server
 ```
 
 ## Usage
 
 #### Visit the frontend application:
-Open your browser and navigate to `http://localhost:3000`.
+Open your browser and navigate to `http://localhost:5173/`.
 
-#### Make sure the backend is running at:
-`http://localhost:3001`.
+
 
 
 ## Screenshots
