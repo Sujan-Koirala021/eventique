@@ -30,20 +30,73 @@
     </p>
 </p>
 
-Welcome to Moniker Maven, a powerful tool designed to help you find and explore unique names with ease. Moniker Maven offers a range of features to streamline your name search process, making it simple and enjoyable to discover the perfect name for your bundle of joy or furry friend.
-
 
 ## Introduction
 Eventique is a comprehensive event management system that streamlines the process of planning, organizing, and managing events. Whether you're coordinating a corporate event, a wedding, or a community gathering, Eventique provides all the tools you need to ensure your event runs smoothly. With its user-friendly interface and powerful features, Eventique is your go-to solution for all your event management needs.
 
-## Features
 
-- **Event Creation**: Easily create and customize events with details such as title, description, date, and organizer information.
-- **Event Management**: Manage multiple events with an intuitive dashboard that provides a clear overview of all your events.
-- **User Permissions**: Ensure security and control with user permission settings, allowing only authorized users to create or delete events.
-- **Event Details Modal**: View detailed information about each event in a sleek modal window, providing a quick and comprehensive overview.
-- **Responsive Design**: Access Eventique from any device with a responsive design that ensures a seamless experience on desktops, tablets, and smartphones.
-- **Real-Time Updates**: Keep your event information up-to-date with real-time updates and notifications.
+## Problem Statement
+
+Despite the availability of numerous event management systems, many lack robust access control mechanisms, leading to security vulnerabilities and operational inefficiencies. Without an effective Role-Based Access Control (RBAC) system, organizations face challenges such as unauthorized access, data breaches, and inability to delegate tasks efficiently. These issues can result in mismanaged events, financial losses, and damage to reputations.
+
+## Objectives
+
+Develop an event management system with a comprehensive Role-Based Access Control (RBAC) framework to address the following challenges:
+
+1. **Unauthorized Access**: Prevent unauthorized users from accessing sensitive event data or performing critical actions such as creating, editing, or deleting events.
+   
+2. **Efficient Delegation**: Enable efficient task delegation by assigning specific roles and permissions to users based on their responsibilities and expertise.
+
+3. **Scalability**: Ensure the RBAC system can scale to accommodate organizations of varying sizes, from small teams to large enterprises with complex hierarchies.
+
+4. **User Management**: Provide an intuitive interface for administrators to manage user roles and permissions easily, including adding, modifying, and removing users and roles.
+
+5. **Audit and Compliance**: Maintain detailed logs of user activities for auditing purposes, ensuring compliance with organizational policies and industry regulations.
+
+## Key Features
+
+To address the identified challenges, the event management system will include the following key features:
+
+1. **Role Definition**: Define roles such as Admin, Event Manager, Coordinator, and Guest, each with specific permissions.
+   
+2. **Permission Assignment**: Assign granular permissions to roles, such as the ability to create, edit, view, or delete events and manage user access.
+
+
+3. **Access Control Policies**: Implement policies that restrict access to event data and management functionalities based on user roles.
+
+4. **Audit Logs**: Maintain comprehensive logs of user actions, including changes to events and user roles, to facilitate auditing and compliance checks.
+
+5. **Scalable Architecture**: Design the RBAC system to handle increasing numbers of users and roles as the organization grows.
+
+## Expected Outcomes
+
+By implementing an event management system with a Permit.io, organizations can expect:
+
+1. **Improved Security**: Enhanced security through controlled access to event data and management functionalities, reducing the risk of unauthorized actions and data breaches.
+
+2. **Operational Efficiency**: Greater operational efficiency by ensuring that tasks are delegated appropriately based on user roles and responsibilities.
+
+3. **Ease of Management**: Simplified user and role management through an intuitive interface, allowing administrators to manage access control effectively.
+
+4. **Regulatory Compliance**: Improved compliance with organizational policies and industry regulations through detailed audit logs and access control mechanisms.
+
+5. **Scalability and Flexibility**: A scalable system that can grow with the organization, accommodating new roles and users as needed.
+
+B
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Demo
 <video src=""></video>
@@ -120,12 +173,13 @@ Open your browser and navigate to `http://localhost:3000`.
 
 
 ## Screenshots
+![1land](https://github.com/Sujan-Koirala021/eventique/assets/84112374/c92dd45b-7afd-4631-b29e-2183a6b22046)
+![2about](https://github.com/Sujan-Koirala021/eventique/assets/84112374/5446ac8d-7238-426e-99c5-f25da97f326b)
+![3signup](https://github.com/Sujan-Koirala021/eventique/assets/84112374/81d0a910-1894-4fda-a54a-3259742b9db1)
+![3dashboard](https://github.com/Sujan-Koirala021/eventique/assets/84112374/a16c07f9-033b-4c3e-b3e1-8854e459a7ff)
+![4deny](https://github.com/Sujan-Koirala021/eventique/assets/84112374/c55be7ac-cc75-4dbc-9f49-dbdb4a21825a)
+![5newEvent](https://github.com/Sujan-Koirala021/eventique/assets/84112374/f780a187-7457-4de6-a685-e086bd674dc8)
 
-![landing](https://github.com/Sujan-Koirala021/moniker-maven/assets/84112374/dad74a1d-53e2-40d7-802b-bc545139b9fa)
-![about](https://github.com/Sujan-Koirala021/moniker-maven/assets/84112374/28317848-27ed-494e-9bf9-42e59c54fb67)
-![contact](https://github.com/Sujan-Koirala021/moniker-maven/assets/84112374/f103f3c0-f3e7-4489-828e-8492bdf8019b)
-![prompt](https://github.com/Sujan-Koirala021/moniker-maven/assets/84112374/7cbb5f4a-6d20-4b02-b50c-2529872b6cb7)
-![result](https://github.com/Sujan-Koirala021/moniker-maven/assets/84112374/f2a36447-c814-4245-9b6f-abc76cdbd418)
 
 
 ## Contributing
