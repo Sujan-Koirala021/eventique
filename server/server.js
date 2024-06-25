@@ -7,6 +7,13 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const User = require('./models/User');
 const Event = require('./models/Event'); // Import Event model
+const { Permit } = require('permitio');
+
+const permit = new Permit({
+  // you'll have to set the PDP url to the PDP you've deployed in the previous step
+  pdp: 'http://localhost:7766',
+  token: 'permit_key_dCW6vmOdNa9pOSBslXbcU12lpU4xSDflIxNpVFp5vZF3CFHSwmy12KHYngYueWhk8hIMsOdeDzxmTsIquoEcLp',
+});
 
 dotenv.config();
 
@@ -26,7 +33,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 // User Registration Route
 app.post('/api/register', async (req, res) => {
-  const { username, email, password, role } = req.body;
+  const { firstName, lastName, username, email, password, role } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -35,9 +42,25 @@ app.post('/api/register', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword, role });
+    const newUser = new User({ firstName, lastName, username, email, password: hashedPassword, role });
 
     await newUser.save();
+
+    // After saving the user, sync with Permit.io
+    const { user } = await permit.api.users.sync({
+      key: email,   // Assuming email can be used as the key
+      email,
+      first_name: firstName,
+      last_name: lastName,
+    });
+
+    // Optionally, assign role after syncing
+    const roleAssignment = await permit.api.users.assignRole({
+      user: email,
+      role,
+      tenant: 'default',  // Adjust tenant if needed
+    });
+
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -67,7 +90,6 @@ app.post('/api/login', async (req, res) => {
 });
 
 // Create Event Route
-// Create Event Route
 app.post('/api/events', async (req, res) => {
   const { title, createdBy, description, date } = req.body;
 
@@ -80,7 +102,6 @@ app.post('/api/events', async (req, res) => {
   }
 });
 
-
 // Fetch Events Route
 app.get('/api/events', async (req, res) => {
   try {
@@ -90,7 +111,6 @@ app.get('/api/events', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 // Delete Event Route
 app.delete('/api/events/:id', async (req, res) => {
@@ -104,6 +124,5 @@ app.delete('/api/events/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
