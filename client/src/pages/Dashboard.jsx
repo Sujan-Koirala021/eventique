@@ -10,10 +10,24 @@ function Dashboard() {
     description: '',
     date: ''
   });
+  // const email = localStorage.getItem(email)
+
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
+    const fetchEmail = async () => {
+      const storedEmail = localStorage.getItem('email');
+      if (storedEmail) {
+        setEmail(storedEmail);
+      } else {
+        console.error('Email not found in local storage');
+      }
+    };
+
+    fetchEmail();
     fetchEvents();
   }, []);
+
 
   const fetchEvents = async () => {
     try {
@@ -73,7 +87,7 @@ function Dashboard() {
                     <p className="text-gray-700">{event.description}</p>
                     <div className="flex space-x-2 mt-4">
                       <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        View Details
+                        View Details 
                       </button>
                       <button
                         onClick={() => handleDelete(event._id)}

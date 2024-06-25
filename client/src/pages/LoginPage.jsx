@@ -23,6 +23,8 @@ function LoginPage() {
       const { token, userId } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
+      localStorage.setItem('email', email);
+
 
       navigate('/dashboard'); // Redirect to dashboard page after successful login
 
