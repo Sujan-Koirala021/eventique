@@ -1,12 +1,7 @@
 import React from 'react';
 import HeroImg from '../assets/heroImg.png';
 import {  useNavigate } from 'react-router-dom';
-import {
-  PaperAirplaneIcon,
-  MoonIcon,
-  SunIcon,
-  Bars3Icon,
-} from "@heroicons/react/24/outline";
+
 
 export default function HeroSection() {
     const navigate = useNavigate();

@@ -34,16 +34,19 @@ Welcome to Moniker Maven, a powerful tool designed to help you find and explore 
 
 
 ## Introduction
-Moniker Maven is a web application that provides a comprehensive suite of tools for finding and exploring names. Whether you're looking for inspiration for a baby name or any other pet naming need, Moniker Maven has you covered. With its intuitive interface and robust features, Moniker Maven is your go-to resource for all things related to names.
-
+Eventique is a comprehensive event management system that streamlines the process of planning, organizing, and managing events. Whether you're coordinating a corporate event, a wedding, or a community gathering, Eventique provides all the tools you need to ensure your event runs smoothly. With its user-friendly interface and powerful features, Eventique is your go-to solution for all your event management needs.
 
 ## Features
 
-- **Name Generation**: Moniker Maven generates unique names based on various criteria, including origin, meaning, and popularity.
-- **Name Exploration**: Explore a vast database of names categorized by origin, gender, and more.
+- **Event Creation**: Easily create and customize events with details such as title, description, date, and organizer information.
+- **Event Management**: Manage multiple events with an intuitive dashboard that provides a clear overview of all your events.
+- **User Permissions**: Ensure security and control with user permission settings, allowing only authorized users to create or delete events.
+- **Event Details Modal**: View detailed information about each event in a sleek modal window, providing a quick and comprehensive overview.
+- **Responsive Design**: Access Eventique from any device with a responsive design that ensures a seamless experience on desktops, tablets, and smartphones.
+- **Real-Time Updates**: Keep your event information up-to-date with real-time updates and notifications.
 
 ## Demo
-<video src="https://github.com/Sujan-Koirala021/moniker-maven/assets/84112374/83191134-73b8-4c3d-b9d8-562270ba01b9"></video>
+<video src=""></video>
 
 
 
@@ -52,6 +55,7 @@ Moniker Maven is a web application that provides a comprehensive suite of tools 
 - React
 - Tailwind
 - Express JS
+- MongoDB
 - Permit.io
 
 ## Getting Started
@@ -60,11 +64,11 @@ Moniker Maven is a web application that provides a comprehensive suite of tools 
 
 #### Clone the repository:
 ```bash
-git clone https://github.com/Sujan-Koirala021/moniker-maven.git
+git clone https://github.com/Sujan-Koirala021/eventique.git
 ```
 #### Go to the repository:
 ```bash
-cd moniker-maven
+cd eventique
 ```
 
 
@@ -82,23 +86,10 @@ npm install
 
 #### Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
-#### Set up a virtual environment :
-```bash
-python -m venv env
 
-source env/bin/activate 
-
-# For Windows use:
-env\Scripts\activate # to activate
-```
-
-#### Install dependencies:
-```bash
-pip install -r requirements.txt
-```
 
 
 
