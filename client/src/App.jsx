@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage'
 import ContactUs from './pages/ContactUs';
 import AboutUs from './pages/AboutPage';
 import Dashboard from './pages/Dashboard';
+import HeroSection from './components/HeroSection';
 
 // import CreatePost from './pages/CreatePost'
 // import ShowResults from './pages/ShowResults'
@@ -34,7 +35,7 @@ function App() {
       children: [
         {
           path: '/',
-          element: <LoginPage />
+          element: <HeroSection />
         },
         {
           path: '/login',
