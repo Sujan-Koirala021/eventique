@@ -114,6 +114,15 @@ cd eventique
 ```bash
 docker run -it \
   -p 7766:7000 \
+  --env PDP_API_KEY=YOUR_PERMIT_API_KEY \
+  --env PDP_DEBUG=True \
+  permitio/pdp-v2:latest
+```
+
+For demo:
+```bash
+docker run -it \
+  -p 7766:7000 \
   --env PDP_API_KEY=permit_key_dCW6vmOdNa9pOSBslXbcU12lpU4xSDflIxNpVFp5vZF3CFHSwmy12KHYngYueWhk8hIMsOdeDzxmTsIquoEcLp \
   --env PDP_DEBUG=True \
   permitio/pdp-v2:latest
@@ -191,7 +200,7 @@ Open your browser and navigate to `http://localhost:5173/`.
 
 ## Contributing
 
-We welcome contributions from the community! If you'd like to contribute to Moniker-Maven, please follow these steps:
+We welcome contributions from the community! If you'd like to contribute to Eventique, please follow these steps:
 
 1. **Fork the Repository**: Click the "Fork" button on GitHub to create your copy.
 
