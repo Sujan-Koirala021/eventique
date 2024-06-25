@@ -126,12 +126,27 @@ app.delete('/api/events/:id', async (req, res) => {
 });
 
 // Check Permission Route
-app.post('/api/check-permission', async (req, res) => {
+app.post('/api/check-permission-create', async (req, res) => {
   const { email } = req.body;
 
   try {
     // Perform permission check using permit.io
     const permitted = await permit.check(email, 'create', 'event'); // Adjust 'event' as needed
+
+    res.status(200).json({ permitted });
+  } catch (error) {
+    console.error('Error checking permission:', error);
+    res.status(500).json({ error: 'Error checking permission' });
+  }
+});
+
+// Check Permission Route
+app.post('/api/check-permission-delete', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Perform permission check using permit.io
+    const permitted = await permit.check(email, 'delete', 'event'); // Adjust 'event' as needed
 
     res.status(200).json({ permitted });
   } catch (error) {

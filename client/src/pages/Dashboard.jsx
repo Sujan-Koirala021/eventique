@@ -61,7 +61,7 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/check-permission', { email });
+      const response = await axios.post('http://localhost:5000/api/check-permission-delete', { email });
       if (response.data.permitted) {
         await axios.delete(`http://localhost:5000/api/events/${id}`);
       fetchEvents();
@@ -76,7 +76,7 @@ function Dashboard() {
 
   const checkPermissionAndToggleVisibility = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/check-permission', { email });
+      const response = await axios.post('http://localhost:5000/api/check-permission-create', { email });
       if (response.data.permitted) {
         toggleFormVisibility();
       } else {
