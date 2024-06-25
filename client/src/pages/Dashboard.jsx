@@ -61,8 +61,14 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/events/${id}`);
+      const response = await axios.post('http://localhost:5000/api/check-permission', { email });
+      if (response.data.permitted) {
+        await axios.delete(`http://localhost:5000/api/events/${id}`);
       fetchEvents();
+      } else {
+        alert('User is not permitted to delete events.');
+      }
+      
     } catch (error) {
       console.error('Error deleting event:', error);
     }
