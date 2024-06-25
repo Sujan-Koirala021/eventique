@@ -10,8 +10,6 @@ function Dashboard() {
     description: '',
     date: ''
   });
-  // const email = localStorage.getItem(email)
-
   const [email, setEmail] = useState('');
 
   useEffect(() => {
@@ -28,10 +26,9 @@ function Dashboard() {
     fetchEvents();
   }, []);
 
-
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/events'); // Adjust the URL as needed
+      const response = await axios.get('http://localhost:5000/api/events');
       setEvents(response.data);
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -53,10 +50,10 @@ function Dashboard() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/events', formData); // Adjust the URL as needed
+      const response = await axios.post('http://localhost:5000/api/events', formData);
       console.log('Event created:', response.data);
-      toggleFormVisibility(); // Close the form after successful submission
-      fetchEvents(); // Refresh the events list
+      toggleFormVisibility();
+      fetchEvents();
     } catch (error) {
       console.error('Error creating event:', error);
     }
@@ -64,23 +61,33 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/events/${id}`); // Adjust the URL as needed
-      fetchEvents(); // Refresh the events list
+      await axios.delete(`http://localhost:5000/api/events/${id}`);
+      fetchEvents();
     } catch (error) {
       console.error('Error deleting event:', error);
     }
   };
 
+  const checkPermissionAndToggleVisibility = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/check-permission', { email });
+      if (response.data.permitted) {
+        toggleFormVisibility();
+      } else {
+        alert('User is not permitted to create events.');
+      }
+    } catch (error) {
+      console.error('Error checking permission:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Main Content */}
       <main className={`flex-1 bg-white ${isFormVisible ? 'blur-sm' : ''}`}>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* Content goes here */}
           <div className="px-4 py-6 sm:px-0">
             <div className="rounded-lg h-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Render events fetched from the server */}
                 {events.map((event) => (
                   <div key={event._id} className="bg-white p-6 rounded-lg shadow-md">
                     <h3 className="text-xl font-bold mb-4">{event.title}</h3>
@@ -103,8 +110,8 @@ function Dashboard() {
           </div>
         </div>
         <button
-          onClick={toggleFormVisibility}
-          className="fixed bottom-10 right-10 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-700"
+          onClick={checkPermissionAndToggleVisibility}
+          className={`fixed bottom-10 right-10 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 ${isFormVisible ? 'hidden' : ''}`}
         >
           + New Event
         </button>
