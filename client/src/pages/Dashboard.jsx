@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FaCalendarAlt, FaUser } from 'react-icons/fa';
 
 function Dashboard() {
   const [isFormVisible, setFormVisible] = useState(false);
@@ -11,6 +12,7 @@ function Dashboard() {
     date: ''
   });
   const [email, setEmail] = useState('');
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     const fetchEmail = async () => {
@@ -64,11 +66,10 @@ function Dashboard() {
       const response = await axios.post('http://localhost:5000/api/check-permission-delete', { email });
       if (response.data.permitted) {
         await axios.delete(`http://localhost:5000/api/events/${id}`);
-      fetchEvents();
+        fetchEvents();
       } else {
         alert('User is not permitted to delete events.');
       }
-      
     } catch (error) {
       console.error('Error deleting event:', error);
     }
@@ -87,6 +88,14 @@ function Dashboard() {
     }
   };
 
+  const handleViewDetails = (event) => {
+    setSelectedEvent(event);
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedEvent(null);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <main className={`flex-1 bg-white ${isFormVisible ? 'blur-sm' : ''}`}>
@@ -98,12 +107,18 @@ function Dashboard() {
                   <div key={event._id} className="bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="px-6 py-4">
                       <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                      <p className="text-gray-700 mb-4">{event.description}</p>
-                      <p className="text-sm text-gray-500">Created by {event.createdBy}</p>
-                      <p className="text-sm text-gray-500">Date: {new Date(event.date).toLocaleDateString()}</p>
+                      <p className="flex items-center text-gray-700 mb-2">
+                        <FaUser className="mr-2" /> {event.createdBy}
+                      </p>
+                      <p className="flex items-center text-gray-700 mb-4">
+                        <FaCalendarAlt className="mr-2" /> {new Date(event.date).toLocaleDateString()}
+                      </p>
                     </div>
                     <div className="px-6 py-4 bg-gray-100 flex justify-end">
-                      <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
+                      <button
+                        onClick={() => handleViewDetails(event)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+                      >
                         View Details
                       </button>
                       <button
@@ -188,6 +203,21 @@ function Dashboard() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {selectedEvent && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
+            <h3 className="text-xl font-bold mb-4">{selectedEvent.title}</h3>
+            <p className="text-gray-700 mb-4">{selectedEvent.description}</p>
+            <button
+              onClick={handleCloseDetails}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}

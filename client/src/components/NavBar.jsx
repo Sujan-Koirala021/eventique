@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+
+import {
+  PaperAirplaneIcon,
+} from "@heroicons/react/24/outline";
+
 function NavBar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +23,12 @@ function NavBar() {
   return (
     <div className='bg-slate-200'>
       <div className='flex flex-row items-center justify-between p-4'>
-        <div className='text-lg font-bold'>
+        <div className='text-lg font-bold ml-8 flex'>
+        <PaperAirplaneIcon className="h-7 w-7 text-black mr-5" />
+        <div>
+
           Eventique
+        </div>
         </div>
         <div className='md:hidden'>
           <button onClick={toggleMenu} className='text-gray-700 focus:outline-none'>
