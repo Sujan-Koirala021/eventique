@@ -84,7 +84,7 @@ By implementing an event management system with a Permit.io, organizations can e
 
 
 ## Demo
-<video src=""></video>
+<video src="https://github.com/Sujan-Koirala021/eventique/assets/84112374/3893ea4d-6218-4d13-8b1f-fd91b797998a"></video>
 
 
 
