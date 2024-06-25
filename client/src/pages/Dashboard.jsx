@@ -89,12 +89,16 @@ function Dashboard() {
             <div className="rounded-lg h-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {events.map((event) => (
-                  <div key={event._id} className="bg-white p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold mb-4">{event.title}</h3>
-                    <p className="text-gray-700">{event.description}</p>
-                    <div className="flex space-x-2 mt-4">
-                      <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        View Details 
+                  <div key={event._id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div className="px-6 py-4">
+                      <h3 className="text-xl font-bold mb-2">{event.title}</h3>
+                      <p className="text-gray-700 mb-4">{event.description}</p>
+                      <p className="text-sm text-gray-500">Created by {event.createdBy}</p>
+                      <p className="text-sm text-gray-500">Date: {new Date(event.date).toLocaleDateString()}</p>
+                    </div>
+                    <div className="px-6 py-4 bg-gray-100 flex justify-end">
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
+                        View Details
                       </button>
                       <button
                         onClick={() => handleDelete(event._id)}

@@ -29,7 +29,7 @@ function NavBar() {
           </button>
         </div>
         <div className={`hidden md:flex md:flex-row md:items-center ${isOpen ? 'flex flex-col w-full' : ''}`}>
-          <Link to="/" className='block p-4 text-gray-700 hover:bg-gray-300'>Home</Link>
+          <Link to="/dashboard" className='block p-4 text-gray-700 hover:bg-gray-300'>Home</Link>
           <Link to="/about" className='block p-4 text-gray-700 hover:bg-gray-300'>About</Link>
           {localStorage.getItem('token') ? (
             <div onClick={handleLogout} className='block p-4 text-gray-700 hover:bg-gray-300 cursor-pointer'>
