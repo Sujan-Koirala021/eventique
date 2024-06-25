@@ -59,6 +59,13 @@ function Dashboard() {
     } catch (error) {
       console.error('Error creating event:', error);
     }
+        // Clear form after submit
+        setFormData({
+          title: '',
+          createdBy: '',
+          description: '',
+          date: ''
+        });
   };
 
   const handleDelete = async (id) => {

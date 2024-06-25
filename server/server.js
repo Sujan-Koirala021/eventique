@@ -9,13 +9,13 @@ const User = require('./models/User');
 const Event = require('./models/Event'); // Import Event model
 const { Permit } = require('permitio');
 
+dotenv.config();
 const permit = new Permit({
   // you'll have to set the PDP url to the PDP you've deployed in the previous step
   pdp: 'http://localhost:7766',
-  token: 'permit_key_dCW6vmOdNa9pOSBslXbcU12lpU4xSDflIxNpVFp5vZF3CFHSwmy12KHYngYueWhk8hIMsOdeDzxmTsIquoEcLp',
+  token: process.env.PERMIT_KEY,
 });
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
