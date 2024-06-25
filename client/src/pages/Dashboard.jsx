@@ -103,33 +103,37 @@ function Dashboard() {
           <div className="px-4 py-6 sm:px-0">
             <div className="rounded-lg h-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {events.map((event) => (
-                  <div key={event._id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div className="px-6 py-4">
-                      <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                      <p className="flex items-center text-gray-700 mb-2">
-                        <FaUser className="mr-2" /> {event.createdBy}
-                      </p>
-                      <p className="flex items-center text-gray-700 mb-4">
-                        <FaCalendarAlt className="mr-2" /> {new Date(event.date).toLocaleDateString()}
-                      </p>
+                {events.length === 0 ? (
+                  <p className="text-5xl text-gray-500 col-span-1 sm:col-span-2 lg:col-span-3 text-center">No events present</p>
+                ) : (
+                  events.map((event) => (
+                    <div key={event._id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                      <div className="px-6 py-4">
+                        <h3 className="text-xl font-bold mb-2">{event.title}</h3>
+                        <p className="flex items-center text-gray-700 mb-2">
+                          <FaUser className="mr-2" /> {event.createdBy}
+                        </p>
+                        <p className="flex items-center text-gray-700 mb-4">
+                          <FaCalendarAlt className="mr-2" /> {new Date(event.date).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <div className="px-6 py-4 bg-gray-100 flex justify-end">
+                        <button
+                          onClick={() => handleViewDetails(event)}
+                          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+                        >
+                          View Details
+                        </button>
+                        <button
+                          onClick={() => handleDelete(event._id)}
+                          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
-                    <div className="px-6 py-4 bg-gray-100 flex justify-end">
-                      <button
-                        onClick={() => handleViewDetails(event)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-                      >
-                        View Details
-                      </button>
-                      <button
-                        onClick={() => handleDelete(event._id)}
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
           </div>
